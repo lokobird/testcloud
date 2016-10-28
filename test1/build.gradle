@@ -1,0 +1,41 @@
+group 'com.yihe.vdc.testcloud'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+def springVersion="3.2.17.RELEASE";
+def slf4jVersion="1.7.12";
+def logbackVersion="1.1.3";
+
+dependencies {
+    compile("org.springframework:spring-core:$springVersion",
+            "org.springframework:spring-web:$springVersion",
+            "org.springframework:spring-webmvc:$springVersion",
+            "org.springframework:spring-tx:$springVersion",
+            "org.springframework:spring-jdbc:$springVersion",
+            "org.springframework:spring-aspects:$springVersion",
+            "com.alibaba:fastjson:1.1.39",
+            "junit:junit:4.11",
+            "commons-net:commons-net:3.0",
+            "servletapi:servlet-api:2.4")
+    //slf4j日志
+    compile("org.slf4j:slf4j-api:$slf4jVersion",
+            "org.slf4j:log4j-over-slf4j:$slf4jVersion",
+            "org.slf4j:slf4j-log4j12:$slf4jVersion",
+            "ch.qos.logback:logback-core:$logbackVersion",
+            "ch.qos.logback:logback-classic:$logbackVersion")
+    providedCompile "servletapi:servlet-api:2.4"
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
